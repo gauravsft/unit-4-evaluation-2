@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expanse Tracker</title>
+    <style>
+        form {
+            margin-left: 20%;
+
+        }
+
+        select {
+            height: 30px;
+            width: 200px;
+            border-radius: 5px;
+        }
+
+        .inputp {
+            height: 25px;
+            width: 195px;
+            border-radius: 5px;
+        }
+
+        h1 {
+            text-align: center;
+            text-decoration: underline;
+        }
+
+        .input {
+            height: 500px;
+            width: 30%;
+            margin: auto;
+        }
+
+        #Submit {
+            margin-top: 20px;
+            height: 30px;
+            width: 205px;
+            border-radius: 5px;
+            background-color: blue;
+        }
+
+        #container{
+            display: grid;
+            height: 300px;
+            width: 100%;
+            grid-template-columns: repeat(4,1fr);
+            grid-template-rows: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="input">
+        <h1>EXPENSE TRACKER</h1>
+        <form action="">
+            <p>Select Month</p>
+            <select name="Select Month" id="select" aria-placeholder="Month">
+                <option value="January">January</option>
+                <option value="January">Febraury</option>
+                <option value="January">March</option>
+                <option value="January">April</option>
+                <option value="January">May</option>
+                <option value="January">June</option>
+                <option value="January">July</option>
+                <option value="January">August</option>
+                <option value="January">September</option>
+                <option value="January">October</option>
+                <option value="January">November</option>
+                <option value="January">December</option>
+            </select>
+            <p>Income</p>
+            <input id="inc" class="inputp" type="text" placeholder="Enter Income in Rs">
+            <p>Expanse</p>
+            <input id="exp" class="inputp" type="text" placeholder="Enter Expanse in Rs">
+
+            <input id="Submit" type="submit" value="Submit">
+        </form>
+        <div id="container">
+
+        </div>
+    </div>
+</body>
+
+<script>
+    document.querySelector("#Submit").addEventListener("click", outputfn);
+
+    function outputfn() {
+        event.preventDefault();
+        var month = document.getElementById("select").value;
+        localStorage.setItem("month", month);
+        var income = document.getElementById("inc").value;
+        localStorage.setItem("income", income);
+        var expance = document.getElementById("exp").value;
+        localStorage.setItem("expance", expance);
+        var saving = income - expance;
+        localStorage.setItem("saving", saving);
+        showfn();
+    }
+    function showfn() {
+        document.querySelector("#container ").innerText = "";
+
+        var box = document.createElement("div");
+
+        var mh = document.createElement("h2");
+        mh.innerText = localStorage.getItem("month");
+        var ie = document.createElement("p");
+        ie.innerText = "Income of Rs :" + localStorage.getItem("income");
+        var ee = document.createElement("p");
+        ee.innerText = "Expense of Rs :" + localStorage.getItem("expance");
+        var sg = document.createElement("p");
+        sg.innerText = "Saving of Rs :" + localStorage.getItem("saving");
+
+        box.append(mh, ie, ee, sg);
+        document.querySelector("#container").append(box)
+
+
+    }
+
+</script>
+
+</html>
